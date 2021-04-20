@@ -1,20 +1,36 @@
-from aiohttp import web
+from aiohttp.web import WebSocketResponse
+import asyncio
+import json
 from aiohttp_jinja2 import template
-from sqlalchemy import select
-from .. import db
 
 
 @template('index.html')
 async def index(request):
-    context = {'some_text': 'First setup'}
+    context = {}
     return context
 
 
-@template('test.html')
-async def test(request):
-    async with request.app['db'].acquire() as conn:
-        query = select([db.tokens.c.id, db.tokens.c.ip, db.tokens.c.token])
-        result = await conn.fetchrow(query)
-        context = {'row': result}
+async def change_token(app):
+    token = app['token_gen'].generate()
+    msg = {'token': token, 't': 1}
 
-    return context
+    await asyncio.wait([sock.send_json(msg) for sock in app['websockets']])
+
+
+async def ws_handler(request):
+    app = request.app
+    ws = WebSocketResponse()
+    await ws.prepare(request)
+
+    app['websockets'].append(ws)
+
+    try:
+        async for msg in ws:
+            data = json.loads(msg.data)
+            if data['action'] == 'change':
+                await change_token(app)
+
+    finally:
+        app['websockets'].remove(ws)
+
+    return ws

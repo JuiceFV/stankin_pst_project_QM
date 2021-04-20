@@ -1,3 +1,26 @@
-<h1>
-    {{ some_text }}
-</h1>
+<p>Current token:</p>
+<p id="token"></p>
+<input id="change-token" type="submit" value="Get Token">
+
+<script>
+    try {
+        var socket = new WebSocket('ws://' + window.location.host + '/ws/')
+    }
+    catch (err) {
+        var socket = new WebSocket('wss://' + window.location.host + '/ws/')
+    }
+
+    button = document.querySelector('#change-token')
+    h1 = document.querySelector('#token')
+
+    document.querySelector('#change-token').onclick = function(e) {
+        e.preventDefault()
+        socket.send(JSON.stringify({action: 'change'}))
+    }
+
+    socket.onmessage = function(e) {
+        data = JSON.parse(e.data)
+        h1.innerHTML = data.token
+    }
+
+</script>

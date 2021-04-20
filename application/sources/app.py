@@ -1,8 +1,9 @@
 from aiohttp import web
-from .routes import setup_routes
 import asyncpgsa
 import jinja2
 import aiohttp_jinja2
+from .routes import setup_routes
+from .token_generator import TokenGenerator
 
 
 async def create_app(config:dict=None):
@@ -24,6 +25,8 @@ async def create_app(config:dict=None):
 async def on_start(app):
     config = app['config']
     app['db'] = await asyncpgsa.create_pool(**config['dsn'])
+    app['websockets'] = list()
+    app['token_gen'] = TokenGenerator()
 
 
 async def on_shutdown(app):
