@@ -12,7 +12,7 @@ async def index(request):
 
 async def change_token(app):
     token = app['token_gen'].generate()
-    msg = {'token': token, 't': 1}
+    msg = {'token': token}
 
     await asyncio.wait([sock.send_json(msg) for sock in app['websockets']])
 

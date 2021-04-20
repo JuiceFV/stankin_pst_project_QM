@@ -1,8 +1,11 @@
 from pathlib import Path
 import yaml
+import os
 
 
-__all__ = 'load_config'
+SOURCE_DIR = os.path.dirname(__file__)
+TEMPLATES_DIR = os.path.join(SOURCE_DIR, 'templates')
+STATIC_DIR = '/static'
 
 
 def load_config(config_file=None):
