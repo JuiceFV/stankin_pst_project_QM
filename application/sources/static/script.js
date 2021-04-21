@@ -1,26 +1,41 @@
+// Creating WebSocket object and initializing server-side websocket
 try {
+    // getting the client's ip address and accessing to the server
+    // HTTP protocol (ws)
     var socket = new WebSocket('ws://' + window.location.host + '/ws/')
 }
 catch (err) {
+    // if error - accessing to the server with HTTPS protocol (wss)
     var socket = new WebSocket('wss://' + window.location.host + '/ws/')
 }
 
+get_token = []
+get_token['header'] = $('.get-token_header')
+get_token['token'] = $('.get-token_token')
+get_token['submit'] = $('.get-token_submit')
 
-function change_token(event) {
-    event.preventDefault()
-    socket.send(JSON.stringify({action: 'change'}))
-}
-
-function update_html(event) {
-    data = JSON.parse(event.data)
-    $('#token').html(data.token)
-}
+send_token = []
+send_token['input'] = $('.send-token_input')
+send_token['submit'] = $('.send-token_submit')
 
 
-$('#change-token').click(function(e) {
-    change_token(e)
+get_token['submit'].click(function(e) {
+    e.preventDefault()  // blocking default event actions
+    console.log('pressed')
+    socket.send(JSON.stringify({action: 'get_token', args: ''}))  // sending json message to server websocket
 });
 
 socket.onmessage = function(e) {
-    update_html(e)
+    // This function executes once server-side websocket sends message
+    // event object contains message in "data" property (e.data)
+    data = JSON.parse(e.data)  // parsing json massege that contains event object
+    get_token['header'].show()
+    get_token['token'].show().html(data.token)  // showing token paragraph and updating text in html
 }
+
+
+send_token['submit'].click(function(e) {
+    e.preventDefault()
+    token = send_token['input'].val()
+    socket.send(JSON.stringify({action: 'send_token', args: token}))
+});

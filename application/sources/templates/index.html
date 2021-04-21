@@ -3,9 +3,17 @@
 
 {% block content %}
 
-<p>Current token:</p>
-<p id="token"></p>
-<input id="change-token" type="submit" value="Get Token">
+<div class="get-token">
+    <h4 class="get-token_header" hidden>Get your token:</h4>
+    <p class="get-token_token" hidden id="token"></p>
+    <input class="get-token_submit" type="submit" value="Get Token">
+</div>
+<br><br>
+<div class="send-token">
+    <h4 class="send-token_header" hidden>Send your token:</h4>
+    <input class="send-token_input" type="text" placeholder="Enter your token here">
+    <input class="send-token_submit" type="submit" value="Send Token">
+</div>
 
 {% endblock %}
 
