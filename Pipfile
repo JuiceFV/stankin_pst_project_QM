@@ -7,11 +7,9 @@ name = "pypi"
 aiohttp = "*"
 aiohttp-jinja2 = "*"
 aioreloader = "*"
-asyncpg = "*"
-asyncpgsa = "*"
 pyyaml = "*"
-aiopg = "*"
 websockets = "*"
+aiopg = "*"
 
 [dev-packages]
 

@@ -1,10 +1,16 @@
 from aiohttp import web
-import asyncpgsa
+import asyncio
+import aiopg.sa as pg
 import jinja2
 import aiohttp_jinja2
 from . import settings
 from .routes import setup_routes
-from .token_generator import TokenGenerator
+from .generator import TokenGenerator
+
+
+# Sets EventLoopPolicy for windows usage
+# Without this loop policy aiopg.sa simply doesn't work
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
 async def create_app(config:dict=None):
@@ -27,10 +33,11 @@ async def create_app(config:dict=None):
 
 async def on_start(app):
     config = app['config']
-    app['db'] = await asyncpgsa.create_pool(**config['dsn'])
+    app['db'] = await pg.create_engine(**config['dsn'])
     app['websockets'] = list()
     app['token_gen'] = TokenGenerator()
 
 
 async def on_shutdown(app):
-    await app['db'].close()
+    app['db'].close()
+    await app['db'].wait_closed()

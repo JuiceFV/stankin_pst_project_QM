@@ -21,8 +21,7 @@ send_token['submit'] = $('.send-token_submit')
 
 get_token['submit'].click(function(e) {
     e.preventDefault()  // blocking default event actions
-    console.log('pressed')
-    socket.send(JSON.stringify({action: 'get_token', args: ''}))  // sending json message to server websocket
+    socket.send(JSON.stringify({action: 'get_token', data: {}}))  // sending json message to server websocket
 });
 
 socket.onmessage = function(e) {
@@ -36,6 +35,9 @@ socket.onmessage = function(e) {
 
 send_token['submit'].click(function(e) {
     e.preventDefault()
-    token = send_token['input'].val()
-    socket.send(JSON.stringify({action: 'send_token', args: token}))
+
+    _token = send_token['input'].val()  // Getting value from input
+
+    sending_data = {token: _token}  // Preparing data to send to server-side
+    socket.send(JSON.stringify({action: 'send_token', data: sending_data}))
 });
