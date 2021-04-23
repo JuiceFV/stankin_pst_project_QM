@@ -1,7 +1,5 @@
 from aiohttp.web import WebSocketResponse
-from . import db
-from sqlalchemy import select, insert
-
+from .database import insert, select
 
 """
 This class describes server-side socket with action handle functions
@@ -27,13 +25,8 @@ class WebSocket:
     async def send_token(self, data):  # accepts data dict from handler
         token = data['token']
         if token in self.app['token_gen'].tokens:
-            # Acquiring new connection to database
-            async with self.app['db'].acquire() as conn:
-                # Inserting values into database
-                query = db.tokens.insert().values({'ip':self.ip, 'token':token})
-                await conn.execute(query)
+            await insert(self.app['db'], token, self.ip)
 
-                # Printing all database values for testing
-                query = db.tokens.select()
-                async for row in conn.execute(query):
-                    print(row)
+            result = await select(self.app['db'])
+            for row in result:
+                print(row)
