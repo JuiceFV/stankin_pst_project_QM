@@ -1,6 +1,7 @@
 from aiohttp.web import WebSocketResponse
-from .database import insert, select, delete
 import asyncio
+from application.sources.database import insert, select
+from application.sources.generators import generate_image
 
 """
 This class describes server-side socket with action handle functions
@@ -21,7 +22,7 @@ class WebSocket:
     async def get_token(self, _):
         # Getting TokenGenerator object from app and generating new token
         token = self.app['token_gen'].generate()
-        # Froming data to send to client-side in json format
+        # Forming data to send to client-side in json format
         data = {'token': token}
         # Creating message with name of function to run and its arguments (data)
         msg = {'action': 'show_token', 'data': data}
@@ -42,3 +43,14 @@ class WebSocket:
             msg = {'action': 'show_queue', 'data': queue}
             # sending updated queue converted to json to all clients
             await asyncio.wait([sock.send_json(msg) for sock in self.app['websockets']])
+
+    # Function handles get_token request from client. Arguments don't needed so it accepts nothing
+    async def get_image(self, _):
+        # Generating new cat image url
+        img_url = await generate_image()
+        # Forming data to send to client-side in json format
+        data = {'url': img_url}
+        # Creating message with name of function to run and its arguments (data)
+        msg = {'action': 'show_image', 'data': data}
+
+        await self.websocket.send_json(msg)  # sending json data to client-side

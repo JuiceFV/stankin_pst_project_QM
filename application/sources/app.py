@@ -5,7 +5,7 @@ import jinja2
 import aiohttp_jinja2
 from . import settings
 from .routes import setup_routes
-from .generator import TokenGenerator
+from .generators import TokenGenerator
 
 
 # Sets EventLoopPolicy for windows usage

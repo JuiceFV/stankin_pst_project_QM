@@ -1,1 +1,1 @@
-from . import frontend
+from .frontend import index

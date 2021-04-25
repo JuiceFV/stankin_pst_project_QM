@@ -26,12 +26,15 @@ queue['cols_num'] = 4
 queue['div'] = $('.queue')
 queue['table'] = $('.queue_table')
 
+cat_image = []
+cat_image['div'] = $('.cat-image')
+cat_image['img'] = $('.cat-image_img')
+
 
 get_token['submit'].click(function(e) {
     e.preventDefault()  // blocking default event actions
     socket.send(JSON.stringify({action: 'get_token', data: {}}))  // sending json message to server websocket
 });
-
 
 send_token['submit'].click(function(e) {
     e.preventDefault()
@@ -40,6 +43,13 @@ send_token['submit'].click(function(e) {
 
     sending_data = {token: _token}  // Preparing data to send to server-side
     socket.send(JSON.stringify({action: 'send_token', data: sending_data}))
+});
+
+$('.get-image').click(function(e) {
+    e.preventDefault()
+
+    // Sending get image request on server
+    socket.send(JSON.stringify({action: 'get_image', data: {}}))
 });
 
 
@@ -55,7 +65,9 @@ socket.onmessage = function(e) {
 function show_token(data) {
     send_token['div'].show()
     get_token['header'].show()
-    get_token['token'].show().html(data.token)  // showing token paragraph and updating text in html
+    get_token['token']
+        .show()
+        .html(data.token)  // showing token paragraph and updating text in html
 }
 
 function show_queue(data) {
@@ -92,4 +104,9 @@ function show_queue(data) {
 
     // Appending html code into table
     queue['table'].append(html)
+}
+
+function show_image(data) {
+    cat_image['div'].show()
+    cat_image['img'].attr('src', data['url'])
 }
