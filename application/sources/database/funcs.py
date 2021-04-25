@@ -9,15 +9,40 @@ async def insert(database, token, ip=''):
         await conn.execute(query)
 
 
-async def select(database, data=None):
+async def select(database, ip=None, token=None):
+    # Acquiring new connection to database
     async with database.acquire() as conn:
-        if data:
-            query = tokens.select().where(**data)
+        # Building select query to database
+        if ip and token:
+            query = tokens.select().where(tokens.c.ip == ip, tokens.c.token == token)
+        elif token:
+            query = tokens.select().where(tokens.c.token == token)
+        elif ip:
+            query = tokens.select().where(tokens.c.ip == ip)
         else:
             query = tokens.select()
 
         result = []
+        # Selecting values from database
         async for row in conn.execute(query):
-            result.append(row)
+            # Converting RawProxy values to python dictionary and appending to result
+            result.append(dict(row))
 
         return result
+
+
+async def delete(database, ip=None, token=None):
+    # Acquiring new connection to database
+    async with database.acquire() as conn:
+        # Building delete query to database
+        if ip and token:
+            query = tokens.delete().where(tokens.c.ip == ip, tokens.c.token == token)
+        elif token:
+            query = tokens.delete().where(tokens.c.token == token)
+        elif ip:
+            query = tokens.delete().where(tokens.c.ip == ip)
+        else:
+            query = tokens.delete()
+
+        # Deleting values from database
+        await conn.execute(query)
