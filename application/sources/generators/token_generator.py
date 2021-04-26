@@ -6,7 +6,7 @@ class TokenGenerator:
         self.tokens = list()
 
     def generate(self):
-        if self.cur_token is None:
+        if self.cur_token is None or self.cur_token == ['Z', '9', '9']:
             self.cur_token = ['A', '0', '0']
         elif self.cur_token[2] < '9':
             self.cur_token[2] = chr(ord(self.cur_token[2]) + 1)

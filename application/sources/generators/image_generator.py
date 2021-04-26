@@ -6,6 +6,7 @@ url = 'https://api.thecatapi.com/v1/images/search'
 
 # Function that generating cat image url
 async def generate_image():
+    img_url = None
     # Opening async client session for making request to address
     async with ClientSession() as session:
         try:

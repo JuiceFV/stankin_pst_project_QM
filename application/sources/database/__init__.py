@@ -1,2 +1,2 @@
-from .funcs import insert, select, delete
+from .database import Database
 from .tables import tokens

@@ -1,11 +1,12 @@
 from aiohttp import web
 import asyncio
-import aiopg.sa as pg
 import jinja2
 import aiohttp_jinja2
 from . import settings
 from .routes import setup_routes
+from .database import Database
 from .generators import TokenGenerator
+from .queue import TokenQueue
 
 
 # Sets EventLoopPolicy for windows usage
@@ -33,11 +34,14 @@ async def create_app(config:dict=None):
 
 async def on_start(app):
     config = app['config']
-    app['db'] = await pg.create_engine(**config['dsn'])
+
+    app['db'] = Database()
+    await app['db'].create_engine(config['dsn'])
+
     app['websockets'] = list()
     app['token_gen'] = TokenGenerator()
+    app['queue'] = TokenQueue()
 
 
 async def on_shutdown(app):
     app['db'].close()
-    await app['db'].wait_closed()

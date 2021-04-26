@@ -1,7 +1,6 @@
 from aiohttp.web import WebSocketResponse
 import asyncio
-from application.sources.database import insert, select
-from application.sources.generators import generate_image
+from ..generators import generate_image
 
 """
 This class describes server-side socket with action handle functions
@@ -34,10 +33,10 @@ class WebSocket:
         token = data['token']
         if token in self.app['token_gen'].tokens:
             # Calling custom function to insert new row into database
-            await insert(self.db, token, self.ip)
+            await self.db.insert(token, self.ip)
 
             # Getting all rows (entire queue) from updated database
-            queue = await select(self.db)
+            queue = await self.db.select()
 
             # Creating message with name of function to run and its arguments (data)
             msg = {'action': 'show_queue', 'data': queue}
