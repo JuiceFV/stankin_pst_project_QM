@@ -1,0 +1,10 @@
+body {
+	background: #c7b39b url(../static/images/bg_main.png) no-repeat;
+	background-size: 100%;
+}
+
+.rectangle {
+	width: 200px;
+	height: 100px;
+	background: red;
+}
