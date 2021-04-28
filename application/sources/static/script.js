@@ -70,7 +70,7 @@ function show_token(data) {
         .html(data.token)  // showing token paragraph and updating text in html
 }
 
-function show_queue(data) {
+function show_queue(tokens) {
     queue['div'].show()
     queue['table'].html('')
 
@@ -90,9 +90,9 @@ function show_queue(data) {
             index = i + offset
             // Since the queue indexes go sequentially from zero to len - 1
             // We can easily check out of queue bounds
-            if (index < data.length)
+            if (index < tokens.length)
                 // Adding new column into row
-                html += `<td>${data[index].token}</td>`
+                html += `<td>${tokens[index]}</td>`
             else
                 // Stop columns loop, because we already out of bounds
                 // Next loop iterations will only increase the index

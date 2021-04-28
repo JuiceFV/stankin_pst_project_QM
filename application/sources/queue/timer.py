@@ -17,7 +17,7 @@ class Timer:
         self.task = asyncio.ensure_future(self.run())
         # Variable that controls while loop in run() method and represents running state
         self.is_running = True
-        self.is_first_call = True
+        self.is_first_call = False
 
 
     # Run method does main timer's work

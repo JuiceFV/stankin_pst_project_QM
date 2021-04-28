@@ -6,7 +6,8 @@ from . import settings
 from .routes import setup_routes
 from .database import Database
 from .generators import TokenGenerator
-from .queue import TokenQueue
+from .queue import Timer
+from .queue import Queue
 
 
 # Sets EventLoopPolicy for windows usage
@@ -37,10 +38,9 @@ async def on_start(app):
 
     app['db'] = Database()
     await app['db'].create_engine(config['dsn'])
-
-    app['websockets'] = list()
+    app['sockets'] = list()
     app['token_gen'] = TokenGenerator()
-    app['queue'] = TokenQueue()
+    app['queue'] = Queue(app)
 
 
 async def on_shutdown(app):

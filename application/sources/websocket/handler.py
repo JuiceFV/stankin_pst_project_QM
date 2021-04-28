@@ -8,10 +8,10 @@ async def ws_handler(request):
     """
     app = request.app
     socket = WebSocket(request)  # creating object that describes socket
+    app['sockets'].append(socket)  # saving socket for subsequent access and sending messages
     ws = socket.websocket  # getting WebSocketResponse object
 
     await ws.prepare(request)  # starting websocket with specific request
-    app['websockets'].append(ws)  # saving websocket for subsequent access and sending messages
 
     # starting infinite loop for listening messages from client websocket
     try:
@@ -23,4 +23,4 @@ async def ws_handler(request):
 
     # Client disconnects from website
     finally:
-        app['websockets'].remove(ws)  # removing WebSocketResponse object from app
+        app['sockets'].remove(socket)  # removing WebSocketResponse object from app
