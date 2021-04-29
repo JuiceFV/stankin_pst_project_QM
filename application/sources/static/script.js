@@ -10,15 +10,22 @@ catch (err) {
     socket = new WebSocket('wss://' + window.location.host + '/ws/')
 }
 
+
+error_msg = {
+    'has_token': 'You already have token',
+    'is_in_queue': 'You are already in the queue',
+    'not_first': 'You are not first in the queue'
+}
+
 get_token = []
 get_token['header'] = $('.get-token_header')
 get_token['token'] = $('.get-token_token')
 get_token['submit'] = $('.get-token_submit')
 
-send_token = []
-send_token['div'] = $('.send-token')
-send_token['input'] = $('.send-token_input')
-send_token['submit'] = $('.send-token_submit')
+insert_token = []
+insert_token['div'] = $('.insert-token')
+insert_token['input'] = $('.insert-token_input')
+insert_token['submit'] = $('.insert-token_submit')
 
 queue = []
 queue['rows_num'] = 16
@@ -28,6 +35,7 @@ queue['table'] = $('.queue_table')
 
 cat_image = []
 cat_image['div'] = $('.cat-image')
+cat_image['submit'] = $('.get-image_submit')
 cat_image['img'] = $('.cat-image_img')
 
 
@@ -36,16 +44,16 @@ get_token['submit'].click(function(e) {
     socket.send(JSON.stringify({action: 'get_token', data: {}}))  // sending json message to server websocket
 });
 
-send_token['submit'].click(function(e) {
+insert_token['submit'].click(function(e) {
     e.preventDefault()
 
-    _token = send_token['input'].val()  // Getting value from input
+    _token = insert_token['input'].val()  // Getting value from input
 
     sending_data = {token: _token}  // Preparing data to send to server-side
-    socket.send(JSON.stringify({action: 'send_token', data: sending_data}))
+    socket.send(JSON.stringify({action: 'insert_token', data: sending_data}))
 });
 
-$('.get-image').click(function(e) {
+cat_image['submit'].click(function(e) {
     e.preventDefault()
 
     // Sending get image request on server
@@ -56,14 +64,14 @@ $('.get-image').click(function(e) {
 socket.onmessage = function(e) {
     // This function executes once server-side websocket sends message
     // event object contains message in "data" property (e.data)
-    msg = JSON.parse(e.data)  // parsing json massege that contains event object
+    msg = JSON.parse(e.data)  // parsing json message that contains event object
     // executing function with same name as msg.action with arguments from msg.data
     window[msg.action](msg.data);
 }
 
 
 function show_token(data) {
-    send_token['div'].show()
+    insert_token['div'].show()
     get_token['header'].show()
     get_token['token']
         .show()
@@ -74,9 +82,25 @@ function show_queue(tokens) {
     queue['div'].show()
     queue['table'].html('')
 
-    html = ''
+    html = get_queue_html(tokens)
 
-    // For that builds html code of table which represents queue
+    // Appending html code into table
+    queue['table'].append(html)
+}
+
+function show_image(data) {
+    cat_image['div'].show()
+    cat_image['img'].attr('src', data['url'])
+}
+
+function show_error(data) {
+
+}
+
+
+function get_queue_html(tokens) {
+    html = ''
+    // Building html code of table which represents queue
     // i is rows index, j is columns index
     for (let i = 0; i < queue['rows_num']; i++) {
         // Starting new row in table
@@ -102,11 +126,5 @@ function show_queue(tokens) {
         html += '</tr>'
     }
 
-    // Appending html code into table
-    queue['table'].append(html)
-}
-
-function show_image(data) {
-    cat_image['div'].show()
-    cat_image['img'].attr('src', data['url'])
+    return html
 }

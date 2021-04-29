@@ -12,21 +12,21 @@ class Queue:
     def __init__(self, app):
         self.app = app
         self.db = app['db']
-        # Starting timer that will pop up token from queue every 10 second
-        self.timer = Timer(self.pop, 3)
-        self.cur_row = None
+        # Starting timer that will pop up token from queue every 15 seconds
+        self.timer = Timer(self.pop, 15)
+        self.first_in_queue = None
 
     # Method pops up last row in database
     async def pop(self):
-        self.cur_row = await self.db.pop()
+        self.first_in_queue = await self.db.pop()
 
-        # Notifying all clients about changes in database and sending updated queue to all of them
-        await self.notify_all()
+        # Sending updated queue to all clients
+        await self.send_queue()
 
-        return self.cur_row
+        return self.first_in_queue
 
     # Method that notifying all clients and sending updated queue
-    async def notify_all(self):
+    async def send_queue(self):
         # Getting all rows (entire queue) from updated database
         queue = await self.db.get_tokens()
 
@@ -36,3 +36,9 @@ class Queue:
         for sock in self.app['sockets']:
             if sock.is_in_queue:
                 await sock.websocket.send_json(msg)
+
+    def is_first_in_queue(self, token, ip):
+        if token == self.first_in_queue['token'] and ip == self.first_in_queue['ip']:
+            return True
+
+        return False
