@@ -42,6 +42,14 @@ class Database:
 
             return result
 
+    async def get_first_row(self):
+        async with self.db.acquire() as conn:
+            query = select(tokens).order_by(asc(tokens.c.id))
+            result = await conn.execute(query)
+            first_row = await result.first()
+
+            return first_row
+
     async def pop(self):
         async with self.db.acquire() as conn:
             query = select(tokens).order_by(asc(tokens.c.id))
@@ -49,8 +57,6 @@ class Database:
             row = await result.first()
 
             if row:
-                print('Popped up token:', row['token'])
-
                 query = delete(tokens).filter_by(id=row['id'])
                 await conn.execute(query)
 

@@ -13,17 +13,19 @@ class Queue:
         self.app = app
         self.db = app['db']
         # Starting timer that will pop up token from queue every 15 seconds
-        self.timer = Timer(self.pop, 15)
-        self.first_in_queue = None
+        self.timer = Timer(self.pop_first, self.remove_first, 10)
+        self.first = None
 
-    # Method pops up last row in database
-    async def pop(self):
-        self.first_in_queue = await self.db.pop()
+    # Method that pops up first row in database
+    async def pop_first(self):
+        #self.first_in_queue = await self.db.pop()
+        self.first = await self.db.get_first_row()
 
+    # Method deletes first row in database, that was popped up earlier
+    async def remove_first(self):
+        await self.db.delete({'id':self.first['id']})
         # Sending updated queue to all clients
         await self.send_queue()
-
-        return self.first_in_queue
 
     # Method that notifying all clients and sending updated queue
     async def send_queue(self):
@@ -38,7 +40,7 @@ class Queue:
                 await sock.websocket.send_json(msg)
 
     def is_first_in_queue(self, token, ip):
-        if token == self.first_in_queue['token'] and ip == self.first_in_queue['ip']:
+        if token == self.first['token'] and ip == self.first['ip']:
             return True
 
         return False

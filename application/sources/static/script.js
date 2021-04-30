@@ -14,6 +14,7 @@ catch (err) {
 error_msg = {
     'has_token': 'You already have token',
     'is_in_queue': 'You are already in the queue',
+    'token_mismatch': 'Sent token does not belong to you or does not exist',
     'not_first': 'You are not first in the queue'
 }
 
@@ -94,7 +95,7 @@ function show_image(data) {
 }
 
 function show_error(data) {
-
+    alert(error_msg[data.error])
 }
 
 

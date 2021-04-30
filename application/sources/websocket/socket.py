@@ -21,17 +21,24 @@ class WebSocket:
 
     # Function handles get_token request from client. Arguments don't needed so it accepts nothing
     async def get_token(self, _):
-        # Getting TokenGenerator object from app and generating new token
-        token = self.app['token_gen'].generate()
-        # Saving client's token for subsequent checks, when client is trying to insert token
-        self.token = token
+        if not self.token:
+            # Getting TokenGenerator object from app and generating new token
+            token = self.app['token_gen'].generate()
+            # Saving client's token for subsequent checks, when client is trying to insert token
+            self.token = token
 
-        # Forming data to send to client-side in json format
-        data = {'token': token}
-        # Creating message with name of function to run and its arguments (data)
-        msg = {'action': 'show_token', 'data': data}
+            # Forming data to send to client-side in json format
+            data = {'token': token}
+            # Creating message with name of function to run and its arguments (data)
+            msg = {'action': 'show_token', 'data': data}
 
-        await self.websocket.send_json(msg)  # sending json data to client-side
+            await self.websocket.send_json(msg)  # sending json data to client-side
+
+        else:
+            data = {'error': 'has_token'}
+            msg = {'action': 'show_error', 'data': data}
+
+            await self.websocket.send_json(msg)
 
     # Notifying all clients about changes in database and sending updated queue to all of them
     async def send_queue(self):
@@ -48,12 +55,21 @@ class WebSocket:
     # Function handles send_token request from client
     async def insert_token(self, data):  # accepts data dict from handler
         token = data['token']
-        if token == self.token:
+        if token == self.token and not self.is_in_queue:
             # Calling custom function to insert new row into database
             await self.db.insert({'token':token, 'ip':self.ip})
             self.is_in_queue = True
 
             await self.send_queue()
+            return
+
+        elif self.is_in_queue:
+            data = {'error': 'is_in_queue'}
+        else:
+            data = {'error': 'token_mismatch'}
+
+        msg = {'action': 'show_error', 'data': data}
+        await self.websocket.send_json(msg)
 
     # Function handles get_token request from client. Arguments don't needed so it accepts nothing
     async def get_image(self, _):
@@ -66,3 +82,9 @@ class WebSocket:
             msg = {'action': 'show_image', 'data': data}
 
             await self.websocket.send_json(msg)  # sending json data to client-side
+
+        else:
+            data = {'error': 'not_first'}
+            msg = {'action': 'show_error', 'data': data}
+
+            await self.websocket.send_json(msg)
