@@ -12,10 +12,12 @@ catch (err) {
 
 
 error_msg = {
-    'has_token': 'You already have token',
-    'is_in_queue': 'You are already in the queue',
-    'token_mismatch': 'Sent token does not belong to you or does not exist',
-    'not_first': 'You are not first in the queue'
+    'has_token': 'You already have token. You need to send it to queue.',
+    'empty_token': 'You sent empty token. Try again.',
+    'is_in_queue': 'You are already in the queue. Please wait for your turn.',
+    'token_mismatch': 'Sent token does not belong to you or does not exist. Try again.',
+    'empty_queue': 'Current queue is empty. Get another token.',
+    'not_first': 'You are not first in the queue. Please wait for your turn.'
 }
 
 get_token = []
@@ -50,8 +52,15 @@ insert_token['submit'].click(function(e) {
 
     _token = insert_token['input'].val()  // Getting value from input
 
-    sending_data = {token: _token}  // Preparing data to send to server-side
-    socket.send(JSON.stringify({action: 'insert_token', data: sending_data}))
+    if (_token) {
+        sending_data = {token: _token}  // Preparing data to send to server-side
+        socket.send(JSON.stringify({action: 'insert_token', data: sending_data}))
+    }
+    else {
+        data = {error: 'empty_token'}
+        show_error(data)
+    }
+
 });
 
 cat_image['submit'].click(function(e) {
@@ -83,6 +92,7 @@ function show_queue(tokens) {
     queue['div'].show()
     queue['table'].html('')
 
+    console.log(tokens)
     html = get_queue_html(tokens)
 
     // Appending html code into table

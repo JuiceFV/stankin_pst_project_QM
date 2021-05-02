@@ -50,20 +50,6 @@ class Database:
 
             return first_row
 
-    async def pop(self):
-        async with self.db.acquire() as conn:
-            query = select(tokens).order_by(asc(tokens.c.id))
-            result = await conn.execute(query)
-            row = await result.first()
-
-            if row:
-                query = delete(tokens).filter_by(id=row['id'])
-                await conn.execute(query)
-
-                return row
-
-            return None
-
     async def delete(self, where):
         # Acquiring new connection to database
         async with self.db.acquire() as conn:
