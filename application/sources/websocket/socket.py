@@ -84,7 +84,6 @@ class WebSocket:
             # Skipping current waiting task (client got his cat image)
             # Getting to the next one
             await self.app['queue'].skip()
-            self.reset_token()
 
         else:
             data = {'error': 'not_first'}

@@ -11,14 +11,13 @@ class Queue:
         self.app = app
         self.db = app['db']
         # Starting timer that will pop up token from queue every 30 seconds
-        self.timer = Timer(self.pop_first, self.remove_first, 30)
+        self.timer = Timer(self.pop_first, self.remove_first, 3)
         self.first = None
         self.is_empty = True
 
     async def insert(self, token, ip):
         # Calling custom function to insert new row into database
         await self.db.insert({'token': token, 'ip': ip})
-
         # Sending updated queue to all clients
         await self.send_queue()
 
@@ -40,7 +39,16 @@ class Queue:
 
     # Method deletes first row in database, that was popped up earlier
     async def remove_first(self):
+        # Getting the socket that stores the first token for subsequent resetting
+        socket_to_reset = next(filter(lambda sock: sock.token == self.first['token'], self.app['sockets']))
+        socket_to_reset.reset_token()
+
+        # Deleting record with current first row from database
         await self.db.delete({'id': self.first['id']})
+
+        msg = {'action': 'hide_queue', 'data': {}}
+        await socket_to_reset.websocket.send_json(msg)
+
         # Sending updated queue to all clients
         await self.send_queue()
 

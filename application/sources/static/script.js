@@ -92,16 +92,19 @@ function show_queue(tokens) {
     queue['div'].show()
     queue['table'].html('')
 
-    console.log(tokens)
     html = get_queue_html(tokens)
 
     // Appending html code into table
     queue['table'].append(html)
 }
 
-function show_image(data) {
-    // if client got image from server - hiding queue block and showing image block
+function hide_queue(_) {
+    // if client got image or missed his turn - hiding queue block and showing image block
+    queue['table'].html('')
     queue['div'].hide()
+}
+
+function show_image(data) {
     cat_image['div'].show()
     cat_image['img'].attr('src', data['url'])
 }
