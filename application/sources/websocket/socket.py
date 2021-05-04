@@ -17,7 +17,7 @@ class WebSocket:
         self.is_in_queue = False
 
     # When client got his cat image or time to get cat image is over, we reset its token
-    async def reset_token(self):
+    def reset_token(self):
         self.token = None
         self.is_in_queue = False
 
@@ -82,7 +82,9 @@ class WebSocket:
             await self.response(action='show_image', data=data)
 
             # Skipping current waiting task (client got his cat image)
+            # Getting to the next one
             await self.app['queue'].skip()
+            self.reset_token()
 
         else:
             data = {'error': 'not_first'}

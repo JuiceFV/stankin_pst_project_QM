@@ -100,6 +100,8 @@ function show_queue(tokens) {
 }
 
 function show_image(data) {
+    // if client got image from server - hiding queue block and showing image block
+    queue['div'].hide()
     cat_image['div'].show()
     cat_image['img'].attr('src', data['url'])
 }

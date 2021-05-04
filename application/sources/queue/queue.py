@@ -36,7 +36,7 @@ class Queue:
         # then we starting timer again
         if not self.first:
             self.is_empty = True
-            await self.timer.cancel()
+            self.timer.cancel()
 
     # Method deletes first row in database, that was popped up earlier
     async def remove_first(self):

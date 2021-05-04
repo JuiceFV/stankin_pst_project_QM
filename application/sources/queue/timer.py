@@ -55,6 +55,12 @@ class Timer:
         while self.is_running:
             # Executing callback function before timer starts
             await self.on_start()
+            # Since the timer can be canceled in the on_start function
+            # we need to check for if it's still running because if the timer
+            # will be canceled in the on_start the current iteration will continue
+            # and execute on_end callback that will delete non-existent token from queue
+            # and cause an exception
+            if not self.is_running: return
             # Waiting for some time interval
             await self.wait()
             # Executing callback function after timer ends
