@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Cats Queue Management System</title>
+	<head>
+		<!-- Required meta tags for  Bootstrap -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<link rel="stylesheet" type="text/css" href="../static/style.css">
-</head>
+		<title>Cats Queue Management System</title>
 
-<body>
+		<link rel="stylesheet" type="text/css" href="../static/style.css">
 
-	<h1>Welcome!</h1>
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	</head>
 
-	<button type="button"><b>Get Your Token</b></button>
+	<body>
+		<header>
+			WELCOME!
+		</header>
 
-	<p><input type="text" size="20" name=""></p>
-	<p><button type="button"><b>Send Your Token</b></button></p>
-	
-	<button type="button"><b>View Cat Image</b></button>
+		<form name="token-handler" action = "../static/script.js">
+			<button type="button" class="get-your-token_btn">
+				<b>GET YOUR TOKEN</b>
+			</button>
 
-</body>
+			<input name="test-input" type="text" size="30px" class="input-token_fld">
+
+			<button type="button" class="send-your-token_btn">
+				<b>SEND YOUR TOKEN</b>
+			</button>
+
+		<footer>
+			IDB-19-07
+		</footer>
+	</body>
 </html>
