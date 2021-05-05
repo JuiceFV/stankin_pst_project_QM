@@ -2,6 +2,14 @@ body {
 	background-color: red;
 }
 
+p {
+	font-family: Britannic Bold;
+}
+
+table {
+	font-family: Britannic Bold;
+}
+
 header {
 	background: #c7b39b url(../static/images/bg_main.png) no-repeat;
 	background-size: 100%;
@@ -31,6 +39,28 @@ header {
 	
 	margin-top: 10px;
 	margin-left: 10px;
+
+	cursor: pointer;
+}
+
+.user-token_rectfld {
+	width: 315px;
+	height: 120px;
+
+	border: 3px solid #000000;
+
+	position: absolute;
+	top: 183px;
+	left: 15px;
+}
+
+.copy-token_item {
+	width: 100px;
+	height: 100px;
+
+	position: absolute;
+	top: 192px;
+	left: 220px;
 
 	cursor: pointer;
 }
@@ -73,6 +103,75 @@ header {
 	left: 340px;
 
 	cursor: pointer;
+}
+
+.token-queue_inactive_btn {
+	background-color: #FF0000;
+	color: #000000;
+
+	font-size: 20px;
+	font-family: Britannic Bold;
+	text-align: center;
+
+	border: none;
+	border-radius: 8px;
+
+	position: absolute;
+	top: 310px;
+	left: 15px;
+
+	width: 624px;
+	height: 50px;
+}
+
+.token-queue_tbl {
+	font-size: 30px;
+
+	position: absolute;
+	top: 360px;
+	left: 15px;
+}
+
+.view-cat-image_btn {
+	background-color: #FF0000;
+
+	font-size: 30px;
+	font-family: Britannic Bold;
+	text-align: center;
+
+	border: none;
+	border-radius: 20px;
+
+	padding-left: 300px;
+	padding-right: 300px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	
+	position: absolute;
+	top: 70px;
+	right: 30px;
+
+	cursor: pointer;
+}
+
+.cat-image_img {
+	width: 490px;
+	height: 490px;
+
+	position: absolute;
+	bottom: 85px;
+	right: 180px;
+}
+
+.cat-image_rectfld {
+	width: 815px;
+	height: 500px;
+
+	border: 3px solid #000;
+
+	position: absolute;
+	bottom: 80px;
+	right: 30px;
 }
 
 footer {
