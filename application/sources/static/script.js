@@ -47,6 +47,13 @@ get_token['submit'].click(function(e) {
     socket.send(JSON.stringify({action: 'get_token', data: {}}))  // sending json message to server websocket
 });
 
+$('.get-token_copy').click(function(e) {
+    e.preventDefault()  // blocking default event actions
+
+    token = $('#token')[0].innerHTML
+    copyToClipboard(token)
+});
+
 insert_token['submit'].click(function(e) {
     e.preventDefault()
 
@@ -143,4 +150,15 @@ function get_queue_html(tokens) {
     }
 
     return html
+}
+
+function copyToClipboard(str) {
+    let area = document.createElement('textarea');
+    document.body.appendChild(area);
+
+    area.value = str;
+    area.select();
+    document.execCommand("copy");
+
+    document.body.removeChild(area);
 }
