@@ -30,9 +30,10 @@ insert_token['div'] = $('.insert-token')
 insert_token['input'] = $('.insert-token_input')
 insert_token['submit'] = $('.insert-token_submit')
 
+// Matrix 6x6
 queue = []
-queue['rows_num'] = 16
-queue['cols_num'] = 4
+queue['rows_num'] = 6
+queue['cols_num'] = 6
 queue['div'] = $('.queue')
 queue['table'] = $('.queue_table')
 
@@ -50,7 +51,7 @@ get_token['submit'].click(function(e) {
 $('.get-token_copy').click(function(e) {
     e.preventDefault()  // blocking default event actions
 
-    token = $('#token')[0].innerHTML
+    token = get_token['token'][0].innerHTML
     copyToClipboard(token)
 });
 
@@ -68,6 +69,8 @@ insert_token['submit'].click(function(e) {
         show_error(data)
     }
 
+    // Clear insert field
+    insert_token['input'].val('')
 });
 
 cat_image['submit'].click(function(e) {
@@ -88,8 +91,8 @@ socket.onmessage = function(e) {
 
 
 function show_token(data) {
-    insert_token['div'].show()
-    get_token['header'].show()
+    // insert_token['div'].show()
+    // get_token['header'].show()
     get_token['token']
         .show()
         .html(data.token)  // showing token paragraph and updating text in html
@@ -139,7 +142,8 @@ function get_queue_html(tokens) {
             // We can easily check out of queue bounds
             if (index < tokens.length)
                 // Adding new column into row
-                html += `<td>${tokens[index]}</td>`
+                // It adds class for fancy looking
+                html += `<td class="aligned-td">${tokens[index]}</td>`
             else
                 // Stop columns loop, because we already out of bounds
                 // Next loop iterations will only increase the index
