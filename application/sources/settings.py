@@ -5,7 +5,7 @@ import os
 
 SOURCE_DIR = os.path.dirname(__file__)
 TEMPLATES_DIR = os.path.join(SOURCE_DIR, 'templates')
-STATIC_DIR = 'sources/static'
+STATIC_DIR = Path(__file__).parent/'static'
 
 
 def load_config(config_file=None):

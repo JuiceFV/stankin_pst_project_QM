@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aiohttp = "*"
-aiohttp-jinja2 = "*"
-aioreloader = "*"
-pyyaml = "*"
-websockets = "*"
-aiopg = "*"
-sqlalchemy = "*"
+aiohttp = "==3.7.4"
+aiohttp-jinja2 = "==1.4.2"
+aioreloader = "==0.4.0"
+pyyaml = "==5.4.1"
+websockets = "==8.1"
+aiopg = "==1.2.1"
+sqlalchemy = "==1.4.11"
 
 [dev-packages]
 
