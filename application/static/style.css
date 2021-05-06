@@ -22,7 +22,7 @@ header {
 	height: 60px;
 }
 
-.get-your-token_btn {
+.get-token_submit {
 	background-color: #FF0000;
 
 	font-size: 30px;
@@ -54,7 +54,15 @@ header {
 	left: 15px;
 }
 
-.copy-token_item {
+.get-token_token {
+	font-size: 50px;
+
+	position: absolute;
+	margin-left: 55px;
+	margin-top: 20px;
+}
+
+.get-token_copy {
 	width: 100px;
 	height: 100px;
 
@@ -71,7 +79,9 @@ header {
 	border: solid;
 }
 
-.input-token_fld {
+.insert-token_input {
+	font-family: Britannic Bold;
+
 	border-width: 5px;
 	border-style: outset;
 	border-color: #000000;
@@ -80,10 +90,11 @@ header {
 	top: 190px;
 	left: 340px;
 
+	width: 297px;
 	height: 50px;
 }
 
-.send-your-token_btn {
+.insert-token_submit {
 	background-color: #FF0000;
 
 	font-size: 20px;
@@ -128,11 +139,65 @@ header {
 	font-size: 30px;
 
 	position: absolute;
-	top: 360px;
+	top: 370px;
 	left: 15px;
 }
 
-.view-cat-image_btn {
+.aligned-td {
+	padding-right: 60px;
+}
+
+.vl1 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 97px;
+	margin-top: 198px;
+
+  	height: 280px;
+}
+
+.vl2 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 210px;
+	margin-top: 198px;
+
+  	height: 280px;
+}
+
+.vl3 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 323px;
+	margin-top: 198px;
+
+  	height: 280px;
+}
+
+.vl4 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 436px;
+	margin-top: 198px;
+
+  	height: 280px;
+}
+
+.vl5 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 549px;
+	margin-top: 198px;
+
+  	height: 280px;
+}
+
+.get-image_submit {
 	background-color: #FF0000;
 
 	font-size: 30px;
@@ -155,12 +220,16 @@ header {
 }
 
 .cat-image_img {
-	width: 490px;
-	height: 490px;
+	/*width: 490px;
+	height: 490px;*/
 
-	position: absolute;
-	bottom: 85px;
-	right: 180px;
+	width: 100%;
+	height: 100%;
+
+	position: relative;
+
+	/* Fit image into the field */
+	object-fit: contain;
 }
 
 .cat-image_rectfld {

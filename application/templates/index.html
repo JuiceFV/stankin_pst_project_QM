@@ -18,48 +18,107 @@
 			WELCOME!
 		</header>
 
-		<form name="token-handler" action = "../static/script.js">
-			<button type="button" class="get-your-token_btn">
+		<form name="token-handler" action = "#">
+			<button type="button" class="get-token_submit">
 				<b>GET YOUR TOKEN</b>
 			</button>
 
 			<div class="user-token_rectfld">
 				<!-- Display generated user token here -->
+				<p class="get-token_token">
+					A03
+				</p>
 			</div>
 
-			<input type="image" src="../static/images/copy_icon.png" class="copy-token_item">
+			<!-- <input type="image" src="../static/images/copy_icon.png" class="copy-token_item"> -->
+			<img src="../static/images/copy_icon.png" class="get-token_copy">
 
-			<input name="test-input" type="text" size="30px" class="input-token_fld">
+			<input name="test-input" type="text" size="30px" class="insert-token_input" placeholder="Enter your token here">
 
-			<button type="button" class="send-your-token_btn">
+			<button type="button" class="insert-token_submit">
 				<b>SEND YOUR TOKEN</b>
 			</button>
 
 			<!-- Queue -->
 			<button class="token-queue_inactive_btn" disabled>TOKEN QUEUE</button>
 			<table class="token-queue_tbl">
+				<!-- -->
+
 				<tr>
-					<td>A00</td>
+					<td class="aligned-td">A00</td>
+					<td class="aligned-td">A01</td>
+					<td class="aligned-td">A02</td>
+					<td class="aligned-td">A03</td>
+					<td class="aligned-td">A04</td>
+					<td class="aligned-td">A05</td>
+				</tr>
+
+				<div class=""></div>
+
+				<tr>
+					<td class="aligned-td">A06</td>
+					<td class="aligned-td">A07</td>
+					<td class="aligned-td">A08</td>
+					<td class="aligned-td">A09</td>
+					<td class="aligned-td">A10</td>
+					<td class="aligned-td">A11</td>
 				</tr>
 
 				<tr>
-					<td>A01</td>
+					<td class="aligned-td">A12</td>
+					<td class="aligned-td">A13</td>
+					<td class="aligned-td">A14</td>
+					<td class="aligned-td">A15</td>
+					<td class="aligned-td">A16</td>
+					<td class="aligned-td">A17</td>	
 				</tr>
 
 				<tr>
-					<td>A02</td>
+					<td class="aligned-td">A18</td>
+					<td class="aligned-td">A19</td>
+					<td class="aligned-td">A20</td>
+					<td class="aligned-td">A21</td>
+					<td class="aligned-td">A22</td>
+					<td class="aligned-td">A23</td>
+				</tr>
+
+				<tr>
+					<td class="aligned-td">A24</td>
+					<td class="aligned-td">A25</td>
+					<td class="aligned-td">A26</td>
+					<td class="aligned-td">A27</td>
+					<td class="aligned-td">A28</td>
+					<td class="aligned-td">A29</td>
+				</tr>
+
+				<tr>
+					<td class="aligned-td">A30</td>
+					<td class="aligned-td">A31</td>
+					<td class="aligned-td">A32</td>
+					<td class="aligned-td">A33</td>
+					<td class="aligned-td">A34</td>
+					<td class="aligned-td">A35</td>	
 				</tr>
 			</table>
 
-			<button type="button" class="view-cat-image_btn">
+			<div class="vl1"></div>
+			<div class="vl2"></div>
+			<div class="vl3"></div>
+			<div class="vl4"></div>
+			<div class="vl5"></div>
+
+			<button type="button" class="get-image_submit">
 				<b>VIEW CAT IMAGE</b>
 			</button>
 
 			<div class="cat-image_rectfld">
 				<!-- Display cat image from server here -->
+				<img src="../static/images/test_cat_img.jpg" class="cat-image_img">
 			</div>
 
-			<img src="../static/images/test_cat_img.jpg" class="cat-image_img">	
+			<!-- <img src="../static/images/test_cat_img.jpg" class="cat-image_img"> -->
+
+			<!-- In future we plan to implement blurred background and stylized prompt window -->
 		</form>
 
 		<footer>
