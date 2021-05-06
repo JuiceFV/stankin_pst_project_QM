@@ -93,8 +93,8 @@ socket.onmessage = function(e) {
 
 
 function show_token(data) {
-    // insert_token['div'].show()
-    // get_token['header'].show()
+    insert_token['div'].show()
+    get_token['header'].show()
     get_token['token']
         .show()
         .html(data.token)  // showing token paragraph and updating text in html
