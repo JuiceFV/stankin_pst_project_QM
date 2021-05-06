@@ -6,7 +6,6 @@ from . import settings
 from .routes import setup_routes
 from .database import Database
 from .generators import TokenGenerator
-from .queue import Timer
 from .queue import Queue
 
 
@@ -38,6 +37,8 @@ async def on_start(app):
 
     app['db'] = Database()
     await app['db'].create_engine(config['dsn'])
+    # Clearing the database queue
+    await app['db'].delete({})
     app['sockets'] = list()
     app['token_gen'] = TokenGenerator()
     app['queue'] = Queue(app)

@@ -40,14 +40,16 @@ class Queue:
     # Method deletes first row in database, that was popped up earlier
     async def remove_first(self):
         # Getting the socket that stores the first token for subsequent resetting
-        socket_to_reset = next(filter(lambda sock: sock.token == self.first['token'], self.app['sockets']))
-        socket_to_reset.reset_token()
+        socket_to_reset = next(filter(lambda sock: sock.token == self.first['token'], self.app['sockets']), None)
 
         # Deleting record with current first row from database
         await self.db.delete({'id': self.first['id']})
 
-        msg = {'action': 'hide_queue', 'data': {}}
-        await socket_to_reset.websocket.send_json(msg)
+        if socket_to_reset:
+            socket_to_reset.reset_token()
+
+            msg = {'action': 'hide_queue', 'data': {}}
+            await socket_to_reset.websocket.send_json(msg)
 
         # Sending updated queue to all clients
         await self.send_queue()
