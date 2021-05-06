@@ -7,12 +7,12 @@ from .routes import setup_routes
 from .database import Database
 from .generators import TokenGenerator
 from .queue import Queue
-
+import platform
 
 # Sets EventLoopPolicy for windows usage
 # Without this loop policy aiopg.sa simply doesn't work
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
+if platform.system() == 'Windows':
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 async def create_app(config:dict=None):
     app = web.Application()
