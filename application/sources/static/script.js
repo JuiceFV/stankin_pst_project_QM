@@ -62,6 +62,8 @@ insert_token['submit'].click(function(e) {
     if (_token) {
         sending_data = {token: _token}  // Preparing data to send to server-side
         socket.send(JSON.stringify({action: 'insert_token', data: sending_data}))
+
+        insert_token['input'].val('')
     }
     else {
         data = {error: 'empty_token'}
