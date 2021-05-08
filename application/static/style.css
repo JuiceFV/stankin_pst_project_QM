@@ -10,6 +10,10 @@ table {
 	font-family: Britannic Bold;
 }
 
+/*button:hover {
+	background-color: #FF7070;
+}*/
+
 header {
 	background: #c7b39b url(../static/images/bg_main.png) no-repeat;
 	background-size: 100%;
@@ -43,11 +47,15 @@ header {
 	cursor: pointer;
 }
 
+.get-token_submit:hover {
+	background-color: #FF7070;
+}
+
 .user-token_rectfld {
 	width: 315px;
 	height: 120px;
 
-	border: 3px solid #000000;
+	border: 4px solid #000000;
 
 	position: absolute;
 	top: 183px;
@@ -116,6 +124,10 @@ header {
 	cursor: pointer;
 }
 
+.insert-token_submit:hover {
+	background-color: #FF7070;
+}
+
 .token-queue_inactive_btn {
 	background-color: #FF0000;
 	color: #000000;
@@ -124,8 +136,9 @@ header {
 	font-family: Britannic Bold;
 	text-align: center;
 
-	border: none;
-	border-radius: 8px;
+	border: solid;
+	border-color: #000000;
+	border-width: 4px;
 
 	position: absolute;
 	top: 310px;
@@ -219,6 +232,10 @@ header {
 	cursor: pointer;
 }
 
+.get-image_submit:hover {
+	background-color: #FF7070;
+}
+
 .cat-image_img {
 	/*width: 490px;
 	height: 490px;*/
@@ -236,7 +253,7 @@ header {
 	width: 815px;
 	height: 500px;
 
-	border: 3px solid #000;
+	border: 4px solid #000;
 
 	position: absolute;
 	bottom: 80px;
