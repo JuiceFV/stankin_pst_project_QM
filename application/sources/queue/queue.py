@@ -11,7 +11,7 @@ class Queue:
         self.app = app
         self.db = app['db']
         # Starting timer that will pop up token from queue every 30 seconds
-        self.timer = Timer(self.pop_first, self.remove_first, 3)
+        self.timer = Timer(self.pop_first, self.remove_first, 30)
         self.first = None
         self.is_empty = True
 
@@ -49,6 +49,8 @@ class Queue:
             socket_to_reset.reset_token()
 
             msg = {'action': 'hide_queue', 'data': {}}
+            await socket_to_reset.websocket.send_json(msg)
+            msg = {'action': 'delete_token', 'data': {}}
             await socket_to_reset.websocket.send_json(msg)
 
         # Sending updated queue to all clients

@@ -32,6 +32,16 @@ class Database:
 
             return result
 
+    async def get_ip_addresses(self):
+        async with self.db.acquire() as conn:
+            query = select([tokens.c.ip]).order_by(asc(tokens.c.id))
+
+            result = []
+            async for token in conn.execute(query):
+                result.append(token['ip'])
+
+            return result
+
     async def get_tokens(self):
         async with self.db.acquire() as conn:
             query = select([tokens.c.token]).order_by(asc(tokens.c.id))
