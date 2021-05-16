@@ -8,12 +8,12 @@ services:
         environment:
             - POSTGRES_DB=catsqms
             - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=
+            - POSTGRES_PASSWORD=1234
 
     application:
         build: .
-        command: sh -c './wait-for db:5432 && python3 application/entry.py'
+        command: sh -c './wait-for db:5432 -- python3 application/entry.py'
         ports:
-            - "8080:8080"
+            - "8080:5000"
         depends_on:
             - db
