@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+    db:
+        image: postgres
+        volumes:
+            - ./application/sources/database/:/docker-entrypoint-initdb.d/
+        environment:
+            - POSTGRES_DB=catsqms
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=
+
+    application:
+        build: .
+        command: sh -c './wait-for db:5432 && python3 application/entry.py'
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
