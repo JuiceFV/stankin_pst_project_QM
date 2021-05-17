@@ -12,7 +12,7 @@ except ImportError:
     print("Library uvloop is not available")
 
 parser = argparse.ArgumentParser(description='CatsQMS')
-parser.add_argument('--host', help='Host to listen', default='0.0.0.0')
+parser.add_argument('--host', help='Host to listen', default='127.0.0.1')
 parser.add_argument('--port', help='Port to accept connections', default='5000')
 parser.add_argument('-r', '--reload', action='store_true', help='Autoreload code on change')
 parser.add_argument('-c', '--config', type=argparse.FileType('r'), help='Path to configuration file')
