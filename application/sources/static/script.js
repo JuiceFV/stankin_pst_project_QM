@@ -85,7 +85,6 @@ cat_image['submit'].click(function(e) {
 
 
 function show_token(data) {
-    //set_cookie(token=data.token)
     setCookie('token', data.token);
 
     insert_token['div'].show();

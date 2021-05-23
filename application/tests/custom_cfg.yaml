@@ -1,0 +1,17 @@
+setting1: 'First'
+setting2: 11111
+some_url: 'https://google.com/'
+
+dsn:
+    'host': 'new_host'
+    'port': 3333
+    'user': 'not_postgres'
+    'password': 'other_pass'
+    'database': 'some_db'
+
+dict:
+    host: 'google.com'
+    port: 8080
+    user: 'local'
+    password: 'pass'
+    database: 'catsqms'
