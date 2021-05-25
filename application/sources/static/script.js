@@ -22,12 +22,10 @@ error_msg = {
 };
 
 get_token = [];
-get_token['header'] = $('.get-token_header');
 get_token['token'] = $('.get-token_token');
 get_token['submit'] = $('.get-token_submit');
 
 insert_token = [];
-insert_token['div'] = $('.insert-token');
 insert_token['input'] = $('.insert-token_input');
 insert_token['submit'] = $('.insert-token_submit');
 
@@ -88,11 +86,7 @@ function show_token(data) {
     //set_cookie(token=data.token)
     setCookie('token', data.token);
 
-    insert_token['div'].show();
-    get_token['header'].show();
-    get_token['token']
-        .show()
-        .html(data.token);  // showing token paragraph and updating text in html
+    get_token['token'].html(data.token);  // showing token paragraph and updating text in html
 }
 
 function show_queue(tokens) {
@@ -144,11 +138,14 @@ function get_queue_html(tokens) {
             if (index < tokens.length)
                 // Adding new column into row
                 // It adds class for fancy looking
-                html += `<td class="aligned-td">${tokens[index]}</td>`;
+                // html += `<td class="aligned-td">${tokens[index]}</td>`;
+
+                // No decorative lines, so no additional class
+                html += `<td>${tokens[index]}</td>`;
             else
                 // Stop columns loop, because we already out of bounds
                 // Next loop iterations will only increase the index
-                break
+                break;
         }
         // Ending new row in table
         html += '</tr>';

@@ -1,0 +1,266 @@
+p {
+	font-family: Britannic Bold;
+}
+
+table {
+	font-family: Britannic Bold;
+}
+
+/*button:hover {
+	background-color: #FF7070;
+}*/
+
+header {
+	background: #c7b39b url(../static/images/bg_main.png) no-repeat;
+	background-size: 100%;
+
+	font-size: 50px;
+	font-family: Britannic Bold;
+	text-align: center;
+
+	width: 100%;
+	height: 60px;
+}
+
+.get-token_submit {
+	background-color: #FF0000;
+
+	font-size: 30px;
+	font-family: Britannic Bold;
+	text-align: center;
+
+	border: none;
+	border-radius: 20px;
+
+	padding-left: 13%;
+	padding-right: 13%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	
+	margin-top: 0.4%;
+	margin-left: 0.9%;
+
+	cursor: pointer;
+}
+
+.get-token_submit:hover {
+	background-color: #FF7070;
+}
+
+.user-token_rectfld {
+	width: 21%;
+
+	border: 4px solid #000000;
+
+	margin-top: 0.5%;
+	margin-left: 0.9%;
+}
+
+.get-token_token {
+	font-size: 50px;
+
+	margin-left: 18%;
+	margin-top: 6.25%;
+}
+
+.get-token_copy {
+	width: 6.5%;
+
+	margin-top: -9.7%;
+	margin-left: 14.3%;
+
+	cursor: pointer;
+}
+
+.output-token_fld {
+	background-color: #808080;
+	border: solid;
+}
+
+.insert-token_input {
+	font-family: Britannic Bold;
+
+	border-width: 5px;
+	border-style: outset;
+	border-color: #000000;
+
+	position: absolute;
+	margin-left: 22.4%;
+	margin-top: -8.9%;
+
+	width: 19.3%;
+	height: 7%;
+}
+
+.insert-token_submit {
+	background-color: #FF0000;
+
+	font-size: 20px;
+	font-family: Britannic Bold;
+	text-align: center;
+
+	border: none;
+	border-radius: 8px;
+
+	padding-left: 4.3%;
+	padding-right: 4.3%;
+	padding-top: 0.4%;
+	padding-bottom: 0.4%;
+
+	position: absolute;
+	top: 33.5%;
+	left: 22.4%;
+
+	cursor: pointer;
+}
+
+.insert-token_submit:hover {
+	background-color: #FF7070;
+}
+
+.token-queue_inactive_btn {
+	background-color: #FF0000;
+	color: #000000;
+
+	font-size: 20px;
+	font-family: Britannic Bold;
+	text-align: center;
+
+	border: solid;
+	border-color: #000000;
+	border-width: 4px;
+
+	position: absolute;
+	top: 41%;
+	left: 0.88%;
+
+	width: 40.9%;
+	height: 7%;
+}
+
+.token-queue_tbl {
+	font-size: 30px;
+
+	position: absolute;
+	top: 49.5%;
+	left: 0.88%;
+}
+
+.aligned-td {
+	padding-right: 60px;
+}
+
+.vl1 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 6.3%;
+	margin-top: 3.5%;
+
+  	height: 37%;
+}
+
+.vl2 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 13.7%;
+	margin-top: 3.5%;
+
+  	height: 37%;
+}
+
+.vl3 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 21.1%;
+	margin-top: 3.5%;
+
+  	height: 37%;
+}
+
+.vl4 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 28.5%;
+	margin-top: 3.5%;
+
+  	height: 37%;
+}
+
+.vl5 {
+	border-left: 3px solid #000000;
+  	
+	position: absolute;
+	margin-left: 35.9%;
+	margin-top: 3.5%;
+
+  	height: 37%;
+}
+
+.get-image_submit {
+	background-color: #FF0000;
+
+	font-size: 30px;
+	font-family: Britannic Bold;
+	text-align: center;
+
+	border: none;
+	border-radius: 20px;
+
+	padding-left: 19.65%;
+	padding-right: 19.65%;
+	padding-top: 1.5%;
+	padding-bottom: 1.5%;
+	
+	position: absolute;
+	top: 9.35%;
+	right: 2%;
+
+	cursor: pointer;
+}
+
+.get-image_submit:hover {
+	background-color: #FF7070;
+}
+
+.cat-image_img {
+	/*width: 490px;
+	height: 490px;*/
+
+	width: 100%;
+	height: 100%;
+
+	position: relative;
+
+	/* Fit image into the field */
+	object-fit: contain;
+}
+
+.cat-image_rectfld {
+	width: 53.2%;
+	height: 65.9%;
+
+	border: 4px solid #000;
+
+	position: absolute;
+	bottom: 10.3%;
+	right: 2%;
+}
+
+footer {
+	background: #c7b39b url(../static/images/bg_main.png) no-repeat;
+	background-size: 100%;
+
+	font-size: 25px;
+	font-family: Britannic Bold;
+	text-align: center;
+
+	position: absolute;
+	bottom: 0%;
+
+	width: 100%;
+	height: 60px;
+}
