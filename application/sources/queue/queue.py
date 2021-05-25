@@ -7,11 +7,11 @@ Also it provides notifies to all clients that are currently in queue
 """
 
 class Queue:
-    def __init__(self, app):
+    def __init__(self, app, interval=30):
         self.app = app
         self.db = app['db']
         # Starting timer that will pop up token from queue every 30 seconds
-        self.timer = Timer(self.pop_first, self.remove_first, 30)
+        self.timer = Timer(self.pop_first, self.remove_first, interval)
         self.first = None
         self.is_empty = True
 

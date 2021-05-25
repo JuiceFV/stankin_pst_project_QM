@@ -12,8 +12,8 @@ services:
 
     application:
         build: .
-        image: app_test
-        command: sh -c './wait-for db:5432 -- python3 application/entry.py --host 0.0.0.0 -c application/config.yaml'
+        image: application
+        command: sh -c './wait-for db:5432 -- python3 application/entry.py -t --host 0.0.0.0 -c application/config.yaml'
         ports:
             - "8080:5000"
         depends_on:

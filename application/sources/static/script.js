@@ -83,7 +83,6 @@ cat_image['submit'].click(function(e) {
 
 
 function show_token(data) {
-    //set_cookie(token=data.token)
     setCookie('token', data.token);
 
     get_token['token'].html(data.token);  // showing token paragraph and updating text in html

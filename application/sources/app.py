@@ -34,7 +34,6 @@ async def create_app(config:dict=None):
 
 async def on_start(app):
     config = app['config']
-
     app['db'] = Database()
     await app['db'].create_engine(config['dsn'])
     # Clearing the database queue
@@ -45,4 +44,4 @@ async def on_start(app):
 
 
 async def on_shutdown(app):
-    app['db'].close()
+    await app['db'].close()
